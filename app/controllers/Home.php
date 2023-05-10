@@ -6,18 +6,14 @@ class Home extends Controller {
 
 		$model 		= new Model;
 		
-		$data 		= array( 
-					'id'	=> 1,
-					'name'	=> 'Daniel' 
+		$arr = array(
+			'name' => 'Goofy',
+			'age'  => 2,
 		);
-		$data_not 	= array(
-					'name'	=> 'Sabina',
-					'id' 	=> 3 
-		);
-		
-		$result 	= $model->where( $data, $data_not );
 
-		show( $result );
+		// $model->insert( $arr );
+
+		$model->update( $arr, 'id', 3 );
 
 		$this->view( 'home' );
 	}
