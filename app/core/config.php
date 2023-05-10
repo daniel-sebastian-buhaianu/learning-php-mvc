@@ -1,23 +1,22 @@
 <?php
 
-if ( $_SERVER[ 'SERVER_NAME' ] == 'localhost' ) {
+if ( isset( $_SERVER['SERVER_NAME'] ) ) {
 
-	/** database config **/
-	define( 'DBHOST', 'localhost' );
-	define( 'DBUSER', 'dsb99@localhost' );
-	define( 'DBNAME', 'db_mvc' );
+	if ( 'localhost' === $_SERVER['SERVER_NAME'] ) {
 
-	define( 'ROOT', 	 'http://localhost/php-mvc/public' );
+		define( 'DBHOST', 'localhost' );
+		define( 'DBUSER', 'dsb99@localhost' );
+		define( 'DBNAME', 'db_mvc' );
 
+		define( 'ROOT', 'http://localhost/php-mvc/public' );
+
+	} else {
+
+		define( 'DBHOST', '' );
+		define( 'DBUSER', '' );
+		define( 'DBNAME', '' );
+
+		define( 'ROOT', 'https://www.yourwebsite.com' );
+
+	}
 }
-else {
-
-	/** database config **/
-	define( 'DBHOST', '' );
-	define( 'DBUSER', '' );
-	define( 'DBNAME', '' );
-
-	define( 'ROOT', 	 'https://www.yourwebsite.com' );
-	
-}
-

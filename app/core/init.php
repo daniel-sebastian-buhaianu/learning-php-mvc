@@ -3,7 +3,7 @@
 require 'confidential.php';
 require 'config.php';
 require 'functions.php';
-require 'Database.php';
-require 'Model.php';
-require 'Controller.php';
-require 'App.php';
+require 'trait-database.php';
+require 'trait-model.php';
+require 'class-controller.php';
+require 'class-app.php';
