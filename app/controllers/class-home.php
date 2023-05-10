@@ -10,6 +10,14 @@ class Home extends Controller {
 	 * Index func.
 	 */
 	public function index() {
+
+		$user = new User();
+
+		$arr['name'] = 'Boom';
+		$arr['age']  = 60;
+
+		$result = $user->insert( $arr );
+
 		$this->view( 'home' );
 	}
 }
