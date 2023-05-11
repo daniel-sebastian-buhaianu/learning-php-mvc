@@ -1,9 +1,7 @@
-<?php 
+<?php
 
 trait Database {
-	/**
-	 * Connect func
-	 */
+
 	private function connect() {
 
 		$string = 'mysql:hostname=' . DBHOST . ';dbname=' . DBNAME;
@@ -12,13 +10,6 @@ trait Database {
 		return $con;
 	}
 
-	/**
-	 * Query func
-	 *
-	 * @param string $query Query string.
-	 *
-	 * @param array  $data Data array.
-	 */
 	public function query( $query, $data = array() ) {
 
 		$con   = $this->connect();
@@ -39,13 +30,6 @@ trait Database {
 		return false;
 	}
 
-	/**
-	 * Get row func
-	 *
-	 * @param string $query Query string.
-	 *
-	 * @param array  $data Data array.
-	 */
 	public function get_row( $query, $data = array() ) {
 
 		$con   = $this->connect();

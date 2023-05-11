@@ -4,27 +4,19 @@ trait Model {
 
 	use Database;
 
-	/**
-	 * Short description
-	 *
-	 * @var $limit Limit variable.
-	 */
-	protected $limit = 10;
 
-	/**
-	 * Short description
-	 *
-	 * @var $offset Offset variable.
-	 */
-	protected $offset = 0;
+	protected $limit        = 10;
+	protected $offset       = 0;
+	protected $order        = 'desc';
+	protected $order_column = 'id';
 
-	/**
-	 * Where func.
-	 *
-	 * @param array $data Data array.
-	 *
-	 * @param array $data_not Data not array.
-	 */
+	public function find_all() {
+
+		$query = "SELECT * FROM {$this->table} LIMIT {$this->limit} OFFSET {$this->offset}";
+
+		return $this->query( $query );
+	}
+
 	public function where( $data, $data_not = array() ) {
 
 		$keys     = array_keys( $data );
@@ -43,20 +35,13 @@ trait Model {
 		}
 
 		$query  = trim( $query, ' && ' );
-		$query .= " limit {$this->limit} offset {$this->offset}";
+		$query .= " ORDER BY {$this->order_column} {$this->order} LIMIT {$this->limit} OFFSET {$this->offset}";
 
 		$data = array_merge( $data, $data_not );
 
 		return $this->query( $query, $data );
 	}
 
-	/**
-	 * First func
-	 *
-	 * @param array $data Data array.
-	 *
-	 * @param array $data_not Data not array.
-	 */
 	public function first( $data, $data_not = array() ) {
 
 		$keys     = array_keys( $data );
@@ -75,7 +60,7 @@ trait Model {
 		}
 
 		$query  = trim( $query, ' && ' );
-		$query .= " limit {$this->limit} offset {$this->offset}";
+		$query .= " LIMIT {$this->limit} OFFSET {$this->offset}";
 
 		$data = array_merge( $data, $data_not );
 
@@ -89,11 +74,6 @@ trait Model {
 		return false;
 	}
 
-	/**
-	 * Insert func
-	 *
-	 * @param array $data Data array.
-	 */
 	public function insert( $data ) {
 
 		$keys = array_keys( $data );
@@ -105,16 +85,18 @@ trait Model {
 		return false;
 	}
 
-	/**
-	 * Update func
-	 *
-	 * @param array  $data Data array.
-	 *
-	 * @param string $column_name Column name string.
-	 *
-	 * @param any    $column_value Column value assoc with column name.
-	 */
 	public function update( $data, $column_name, $column_value ) {
+
+		if ( ! empty( $this->allowedColumns ) ) {
+
+			foreach ( $data as $key => $value ) {
+
+				if ( ! in_array( $key, $this->allowedColumns ) ) {
+					unset( $data[ $key ] );
+				}
+			}
+		}
+
 
 		$keys = array_keys( $data );
 
@@ -133,13 +115,6 @@ trait Model {
 		return false;
 	}
 
-	/**
-	 * Delete func
-	 *
-	 * @param string $column_name Column_name string.
-	 *
-	 * @param any    $column_value Column value any.
-	 */
 	public function delete( $column_name = 'id', $column_value ) {
 
 		$data = array( $column_name => $column_value );

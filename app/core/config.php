@@ -20,3 +20,10 @@ if ( isset( $_SERVER['SERVER_NAME'] ) ) {
 
 	}
 }
+
+define( 'APP_NAME', 'My Website' );
+define( 'APP_DESC', 'Best website on the planet' );
+
+
+// true means - show erros
+define( 'DEBUG', true );

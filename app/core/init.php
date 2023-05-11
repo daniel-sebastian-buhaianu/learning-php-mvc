@@ -5,20 +5,14 @@ spl_autoload_register( 'require_model' );
 require 'confidential.php';
 require 'config.php';
 require 'functions.php';
-require 'trait-database.php';
-require 'trait-model.php';
-require 'class-controller.php';
-require 'class-app.php';
+require 'database.trait.php';
+require 'model.trait.php';
+require 'controller.class.php';
+require 'app.class.php';
 
 
-
-/**
- * Requires a model
- *
- * @param string $class_name Class name.
- */
 function require_model( $class_name ) {
 	$class_name = lcfirst( $class_name );
-	$filename   = "../app/models/class-{$class_name}.php";
+	$filename   = "../app/models/{$class_name}.class.php";
 	require $filename;
 }

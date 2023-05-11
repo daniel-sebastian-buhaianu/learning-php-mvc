@@ -1,13 +1,7 @@
 <?php
-/**
- * Controller class
- */
+
 class Controller {
-	/**
-	 * View func
-	 *
-	 * @param string $name Parameter name.
-	 */
+
 	public function view( $name ) {
 
 		$filename = '../app/views/' . $name . '.view.php';
